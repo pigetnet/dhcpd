@@ -4,6 +4,7 @@
 /do/dhcpd/install
 
 /show/listecho "Modify /etc/dhcp/dhcpd.conf" $OK
+/system/autoBackup "/etc/dhcp/dhcpd.conf"
 cat <<\EOF > /etc/dhcp/dhcpd.conf &&
 # SERVE IP ADDRESS TO WLAN0 (For HOTSPOT see github.com/pigetnet/dhcpd)
 # Source : https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software
@@ -27,8 +28,12 @@ subnet 192.168.42.0 netmask 255.255.255.0 {
 EOF
 
 /show/listecho "Modify /etc/default/isc-dhcp-server" $OK
-cat <<\EOF > /etc/dhcp/dhcpd.conf &&
+/system/autoBackup "/etc/default/isc-dhcp-server"
+cat <<\EOF > /etc/default/isc-dhcp-server &&
 # SERVE IP ADDRESS TO WLAN0 (For HOTSPOT see github.com/pigetnet/dhcpd)
 # Source : https://learn.adafruit.com/setting-up-a-raspberry-pi-as-a-wifi-access-point/install-software
 INTERFACES="wlan0"
+
 EOF
+
+/show/nlbecho ""
